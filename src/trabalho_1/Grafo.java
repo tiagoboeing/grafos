@@ -7,9 +7,42 @@ public class Grafo {
 	
 	private ArrayList<Vertice> listaVertices = new ArrayList<Vertice>();
 	private ArrayList<Aresta> arestas = new ArrayList<Aresta>();
-	private boolean isValorado;
 	private Integer tipoGrafo;
+	private Boolean isValorado;
 
+	
+	
+	// pergunta se grafo é valorado ou não
+	public Boolean grafoValorado(String valor){
+		
+		Boolean grafoValorado;
+
+			switch (valor) {
+			
+			case "SIM":
+				grafoValorado = true;
+				break;
+				
+			case "NÃO":
+				grafoValorado = false;
+				break;
+				
+			case "1":
+				grafoValorado = true;
+				break;
+				
+			case "0":
+				grafoValorado = false;
+				break;
+				
+			default:
+				grafoValorado = false;
+				
+			}
+			
+			return grafoValorado;
+	}
+	
 	
 	// método para informar vértices
 	public void informarVertices(){
@@ -22,7 +55,7 @@ public class Grafo {
 			String nomesVertices = "";
 			
 			for (Vertice vertice : listaVertices) {
-				nomesVertices += " \n " + vertice.getNome();
+				nomesVertices += " \n " + vertice.getNome().toUpperCase();
 			}
 			
 			//exibe lista de vertices cadastrados
@@ -44,7 +77,7 @@ public class Grafo {
 	
 	
 	// ARESTAS
-	public void informarArrestas(){
+	public void informarArestas(Boolean isValorado){
 		
 		String sair = "";
 		
@@ -61,11 +94,11 @@ public class Grafo {
 		do{
 			
 			// faz cadastro
-			String arrasta = JOptionPane.showInputDialog("Lista de vértices:" + nomesVertices 
-					+ "\n Lista de arestas: \n" + arestasNomes + " \n Informe as arestas separadas por , \n Ex.: 1,2");
+			String aresta1 = JOptionPane.showInputDialog("Lista de vértices:" + nomesVertices.toUpperCase() 
+					+ "\n Lista de arestas: \n" + arestasNomes.toUpperCase() + " \n Informe as arestas separadas por , \n Ex.: 1,2");
 			
 			// pega valores individualmente, quebrando por ,
-			String[] vertice = arrasta.split(",");
+			String[] vertice = aresta1.split(",");
 			
 			// cria dois vértices, CHEGADA e SAÍDA
 			Vertice vertice1 = new Vertice();
@@ -86,6 +119,20 @@ public class Grafo {
 			aresta.setVerticeChegada(vertice2);
 			aresta.setVerticeSaida(vertice1);
 			
+			// se o grafo for valorado pede o valor da aresta
+			if(getIsValorado() == true){
+				
+				String valorAresta = JOptionPane.showInputDialog("Qual o valor da aresta " + aresta1 + "?");
+				
+				if(valorAresta.equals("")){
+					valorAresta = "0";
+				} 
+				
+				aresta.setValor(Double.parseDouble(valorAresta));
+				
+			}
+			
+			
 			// joga para o arraylist
 			arestas.add(aresta);
 			
@@ -93,7 +140,13 @@ public class Grafo {
 			
 			// varre arralist de arestas
 			for (Aresta art : arestas) {
-				arestasNomes += "("+art.getVerticeSaida().getNome()+","+art.getVerticeChegada().getNome()+")";
+				
+				if(getIsValorado() == false){
+					arestasNomes += "("+art.getVerticeSaida().getNome()+","+art.getVerticeChegada().getNome()+")";
+				} else {
+					arestasNomes += "("+art.getVerticeSaida().getNome()+","+art.getVerticeChegada().getNome()+")" + " - Valor: " + art.getValor() +"\n";
+				}
+				
 			}
 			
 			// pergunta se usuário deseja cadastrar mais
@@ -115,16 +168,29 @@ public class Grafo {
 		
 		String chegada = "";
 		String saida = "";
+		String valorLista = "";
 		
 		// varre lista de arestas
 		for (Aresta aresta : arestas) {
-			saida += aresta.getVerticeSaida().getNome()+" ";
-			chegada += aresta.getVerticeChegada().getNome()+" ";
+			saida += aresta.getVerticeSaida().getNome()+"   |   ";
+			chegada += aresta.getVerticeChegada().getNome()+"   |   ";
+			
+			
+//			checa se existem valores
+			if(getIsValorado() == true){
+				valorLista += aresta.getValor() + "  | ";
+			} else {
+				valorLista = "--- Grafo não valorado ---";
+			}
+			
 		}
 		
 		// mostra arestas de chegada e saída nos dois conjuntos - V e E
 		System.out.println("v  : "+ saida);
-		System.out.println("e  :    "+ chegada);
+		System.out.println("e  : "+ chegada);
+		System.out.println("   "+ valorLista);
+		
+		
 	}
 	
 	
@@ -291,14 +357,6 @@ public class Grafo {
 		this.listaVertices = vertice;
 	}
 
-	public boolean isValorado() {
-		return isValorado;
-	}
-
-	public void setValorado(boolean isValorado) {
-		this.isValorado = isValorado;
-	}
-
 	public Integer getTipoGrafo() {
 		return tipoGrafo;
 	}
@@ -307,13 +365,21 @@ public class Grafo {
 		this.tipoGrafo = tipoGrafo;
 	}
 	
-	
-	
 	public ArrayList<Aresta> getArrestas() {
 		return arestas;
 	}
 
 	public void setArrestas(ArrayList<Aresta> arestas) {
 		this.arestas = arestas;
+	}
+
+
+	public Boolean getIsValorado() {
+		return isValorado;
+	}
+
+
+	public void setIsValorado(Boolean isValorado) {
+		this.isValorado = isValorado;
 	}
 }

@@ -12,13 +12,18 @@ public class main {
 		
 		// questiona tipo de grafo
 		g.setTipoGrafo(tipo);
-		
+
 		// pede para informar vértices
 		g.informarVertices();
 		
-		// pergunta arestas
-		g.informarArrestas();
-		
+			// pergunta arestas e se grafo é valorado ou não
+			String valorado = JOptionPane.showInputDialog("Grafo valorado? SIM - NÃO | 1 ou 0");
+			Boolean isValor = g.grafoValorado(valorado.toUpperCase());
+			g.setIsValorado(isValor);
+			
+			// pede valor das arestas
+			g.informarArestas(isValor);
+			
 		// listagem pós cadastros
 		g.listarArestas();
 		g.listaAdjacencia();

@@ -2,11 +2,11 @@ package trabalho_1;
 
 public class Aresta {
 	
-	private Integer valor;
+	private Double valor;
 	private Vertice verticeSaida;
 	private Vertice verticeChegada;
 	
-	public Integer getValor() {
+	public Double getValor() {
 		return valor;
 	}
 	public Vertice getVerticeSaida() {
@@ -15,7 +15,7 @@ public class Aresta {
 	public Vertice getVerticeChegada() {
 		return verticeChegada;
 	}
-	public void setValor(Integer valor) {
+	public void setValor(Double valor) {
 		this.valor = valor;
 	}
 	public void setVerticeSaida(Vertice verticeSaida) {
