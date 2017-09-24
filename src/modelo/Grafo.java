@@ -2,11 +2,12 @@ package modelo;
 
 import java.util.*;
 
-public class Graph {
+public class Grafo {
+	
     private static final int UNDEFINED = -1;
     private int vertices[][];
 
-    public Graph(int numVertices) {
+    public Grafo(int numVertices) {
         vertices = new int[numVertices][numVertices];
     }
 

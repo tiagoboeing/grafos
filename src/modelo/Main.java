@@ -16,7 +16,7 @@ public class Main {
             System.out.println(type + ":");
             String line = in.nextLine().trim();
             if (line.isEmpty()) {
-                System.out.println("Bye bye!");
+                System.out.println("Programa encerrado!");
                 System.exit(0);
             }
             try {
@@ -24,7 +24,7 @@ public class Main {
                 if (station >= 1 && station <= 20) return station-1;
             } catch (NumberFormatException e) {
             }
-            System.out.println("Invalid station! Try again.");
+            System.out.println("Vértice inválido!");
         }
     }
 
@@ -33,16 +33,16 @@ public class Main {
         // Create the Graphland Subway System
         // (see subwaySystem.pdf file in extra folder)
         //--------------------------------------------
-        Graph subway = new Graph(20);
+        Grafo grafo = new Grafo(20);
 
         // ARESTAS E CUSTOS - origem e destino
-        subway.makeEdge(V1, V2, 5);
-        subway.makeEdge(V1, V3, 20);
-        subway.makeEdge(V1, V4, 40);
-        subway.makeEdge(V1, V5, 50);
-        subway.makeEdge(V2, V4, 15);
-        subway.makeEdge(V3, V5, 5);
-        subway.makeEdge(V4, V5, 5);
+        grafo.makeEdge(V1, V2, 5);
+        grafo.makeEdge(V1, V3, 20);
+        grafo.makeEdge(V1, V4, 40);
+        grafo.makeEdge(V1, V5, 50);
+        grafo.makeEdge(V2, V4, 15);
+        grafo.makeEdge(V3, V5, 5);
+        grafo.makeEdge(V4, V5, 5);
 
 
         //Graphland Subway Terminal
@@ -51,12 +51,12 @@ public class Main {
         System.out.println("-------------------------------------------------------");
 
         while (true) {
-            System.out.println("Please, enter your desired route. Leave the field blank to exit.");
-            int source = readStation("Source", in);
-            int destination = readStation("Destination", in);
+            System.out.println("Informe o vértice de partida e o de destino \n(deixa em branco para fechar)\n");
+            int origem = readStation("Vértice de inicial", in);
+            int destino = readStation("Destino", in);
 
-            System.out.println("Fastest route:");
-            for (Integer station : subway.path(source, destination)) {
+            System.out.println("Caminho mais curto:");
+            for (Integer station : grafo.path(origem, destino)) {
                 System.out.print((station+1) + " -> ");
             }
             System.out.println("EXIT");
