@@ -110,58 +110,28 @@ public class TelaPrincipal extends JFrame {
 			// AÇÃO DO BOTÃO CALCULAR
 			public void actionPerformed(ActionEvent arg0) {
 
-				String resultadoVertices = "==============\nLISTA DE VÉRTICES: \n";
-
 				// pega os vértices
+				String resultadoVertices = "==============\nLISTA DE VÉRTICES: \n";
+				
 				String[] todosVertices = txtVertices.getText().split(",");
 				for (int i = 0; i < todosVertices.length; i++) {
 					resultadoVertices += "Vértice: " + todosVertices[i] + "\n";
 				}					
+				System.out.println(resultadoVertices); // mostra os vértices cadastrados
 				
-				System.out.println(resultadoVertices);
-
-				/*Aresta[] arestas2 = {
-
-						new Aresta(0, 2, 1), 
-						new Aresta(0, 3, 4), 
-						new Aresta(0, 4, 2), 
-						new Aresta(0, 1, 3),
-						new Aresta(1, 3, 2), 
-						new Aresta(1, 4, 3), 
-						new Aresta(1, 5, 1), 
-						new Aresta(2, 4, 1),
-						new Aresta(3, 5, 4), 
-						new Aresta(4, 5, 2), 
-						new Aresta(4, 6, 7), 
-						new Aresta(4, 7, 2),
-						new Aresta(5, 6, 4), 
-						new Aresta(6, 7, 5) 
-				};*/
-
+				
+				// pega arestas
 				String dados = "==============\nLISTA DE ARESTAS \n----- valor \n";
-				
-				Aresta[] arestas2;
-				int cont = 0;
-				
-						for(Aresta a1 : listaArestas) {
-							
-							dados += a1.getVerticeOrigem() + "," + a1.getVerticeDestino() + " = " + a1.getValor() + "\n";
-							
-							arestas2 = new Aresta[listaArestas.size()];
-							new Aresta(a1.getVerticeOrigem(), a1.getVerticeDestino(), a1.getValor());
-							
-							cont = cont + 1;
-						}		
-				
-						System.out.println(dados);
-						
-						Grafo g = new Grafo(arestas2);
-						//g.calculaMenorDistancia();
-				
-				/*Grafo g = new Grafo(listaArestas);
-				g.calculaMenorDistancia();
 
-				g.mostraResultado();*/
+				for(Aresta a1 : listaArestas) {
+					dados += a1.getVerticeOrigem() + "," + a1.getVerticeDestino() + " = " + a1.getValor() + "\n";							
+				}		
+				System.out.println(dados);
+					
+				
+				Grafo g = new Grafo(listaArestas);
+				g.calculaMenorDistancia();
+				g.mostraResultado();
 
 			}
 		});
@@ -240,12 +210,11 @@ public class TelaPrincipal extends JFrame {
 						int aresta1 = Integer.parseInt(txtAresta1.getText());
 						int aresta2 = Integer.parseInt(txtAresta2.getText());
 						int valorAresta = Integer.parseInt(txtValorAresta.getText());
-						
+	
+						// joga para arraylist
 						Aresta a = new Aresta(aresta1, aresta2, valorAresta);
 						listaArestas.add(a);
-						
-						new Aresta(aresta1, aresta2, valorAresta);
-						
+							
 					}
 				
 			}

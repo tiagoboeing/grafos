@@ -6,8 +6,8 @@ import javax.swing.JOptionPane;
 
 public class Grafo {
 
-	private ArrayList<Vertice> listaVertices = new ArrayList<Vertice>();
-	private ArrayList<Aresta> arestas = new ArrayList<Aresta>();
+	public ArrayList<Vertice> listaVertices = new ArrayList<Vertice>();
+	public ArrayList<Aresta> arestas = new ArrayList<Aresta>();
 
 	private Integer tipoGrafo;
 	private Boolean isValorado;
@@ -195,7 +195,6 @@ public class Grafo {
 
 	
 	
-	
 	// lista matriz de adjacência
 	public void listaAdjacencia() {
 
@@ -228,8 +227,6 @@ public class Grafo {
 	}
 	
 	
-	
-
 	// matriz de adjacência é uma matriz |V| x |V|
 	// a entrada na linha i e coluna j será 1 se e somente se a aresta (i, j)
 	// estiver no grafo.
@@ -304,8 +301,6 @@ public class Grafo {
 	}
 
 	
-	
-	
 	// MATRIZ INCIDENCIA
 	public void matrizIncidencia() {
 
@@ -357,9 +352,7 @@ public class Grafo {
 			System.out.print("\n");
 		}
 	}
-	
-	
-	
+		
 
 	// Dijkstra - MATRIZ MENOR CAMINHO
 	public void matrizDistanciaDijkstra(String verticeInicial) {
@@ -375,7 +368,7 @@ public class Grafo {
 		matrizDistancia = new int[listaVertices.size()][listaVertices.size()];
 		
 		
-		// esquema do vértice visitado
+		// marca todos os vértices anteriores como null
 		for (Vertice vertices2 : listaVertices) {
 			
 			Vertice vert = vertices2;
@@ -436,7 +429,7 @@ public class Grafo {
 				if (vert.getNome().equals(verticeInicial)) {
 					vert.setValorVertice(0);
 				} else {
-					vert.setValorVertice(99999);
+					vert.setValorVertice(Integer.MAX_VALUE);
 				}
 				vert.setVerticeAnterior(null);
 				
@@ -483,7 +476,7 @@ public class Grafo {
 
 		listarExentricidades();
 
-		int raio = 99999;
+		int raio = Integer.MAX_VALUE;
 		for (Vertice vertice : listaVertices) {
 			if (vertice.getVerticeChegada() < raio) {
 				raio = vertice.getVerticeChegada();
@@ -506,7 +499,7 @@ public class Grafo {
 	}
 
 	
-	
+	// MAIOR DISTÂNCIA
 	private void listarExentricidades() {
 
 		int[][] matriz;
@@ -556,8 +549,6 @@ public class Grafo {
 			
 		}
 	}
-	
-	
 	
 
 	public ArrayList<Vertice> getVertices() {

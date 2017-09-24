@@ -25,12 +25,12 @@ public class Main {
 		g.informarArestas(isValor);
 
 		// listagem pós cadastros
-		g.listarArestas();
-		g.listaAdjacencia();
+		// g.listarArestas();
+		// g.listaAdjacencia();
 
 		// exibe matrizes
-		g.matrizAdjacencia();
-		g.matrizIncidencia();
+		// g.matrizAdjacencia();
+		// g.matrizIncidencia();
 
 		// pergunta qual vértice será ponto de partida
 		String verticePartida = JOptionPane.showInputDialog(
@@ -40,6 +40,8 @@ public class Main {
 
 		// chama algoritmo de dijkstra
 		g.matrizDistanciaDijkstra(verticePartida);
+		
+		
 
 	}
 }

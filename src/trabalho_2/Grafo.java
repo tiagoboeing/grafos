@@ -1,14 +1,12 @@
 package trabalho_2;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Grafo {
 
 	private Vertice[] vertices;
+	
 	private int quantVertices;
-
-	private Aresta[] arestas;
 	private int quantArestas;
 	
 	private static ArrayList<Aresta> listaArestas = new ArrayList<Aresta>();
@@ -21,22 +19,24 @@ public class Grafo {
 		
 		// atribui recebimento do método
 		this.listaArestas = listaArestas;
-		this.quantVertices = calculaQuantDeVertices(listaArestas);
-		this.vertices = new Vertice[this.quantVertices];
+		this.quantVertices = calculaQuantDeVertices(listaArestas); // 5 vértices no grafo de exemplo
+		this.vertices = new Vertice[this.quantVertices]; // vetor de tamanho [5]
 		
-		// cria novo vértice varrendo quantidade de vértices
 		for (int i = 0; i < this.quantVertices; i++) {
 			this.vertices[i] = new Vertice();
 		}
 
 		// quantidade de arestas é o tamanho do arraylist
-		this.quantArestas = listaArestas.size();
-
+		this.quantArestas = listaArestas.size(); // 7 no grafo de exemplo
+		
 		
 		for (int ar = 0; ar < this.quantArestas; ar++) {
 			
-			this.vertices[arestas[ar].getVerticeOrigem()].getListaArestas().add(arestas[ar]);
-			this.vertices[arestas[ar].getVerticeDestino()].getListaArestas().add(arestas[ar]);
+			
+			//this.vertices[listaArestas.get(ar).getVerticeOrigem()].getListaArestas().add(listaArestas.get(ar));
+
+			//this.vertices[listaArestas.get(ar).getVerticeDestino()].getListaArestas().add(listaArestas.get(ar));
+			
 			
 		}
 	}
@@ -54,11 +54,13 @@ public class Grafo {
 			}
 		}
 
-		quantVertices++;
+		//quantVertices++;
 
 		return quantVertices;
-
 	}
+	
+	
+	
 
 	// algoritmo de dijkstra - calcula menor distância
 	public void calculaMenorDistancia() {
@@ -68,7 +70,7 @@ public class Grafo {
 		int proximoVertice = 0;
 
 		// visita todos os vértices
-		for (int i = 0; i < this.vertices.length; i++) {
+		for (int i = 0; i <= this.vertices.length; i++) {
 
 			// rodear a vizinhança
 			ArrayList<Aresta> currentArestaVertices = this.vertices[proximoVertice].getListaArestas();
@@ -103,7 +105,7 @@ public class Grafo {
 		int verticePartida = 0;
 		int storedDist = Integer.MAX_VALUE;
 
-		for (int i = 0; i < this.vertices.length; i++) {
+		for (int i = 0; i <= this.vertices.length; i++) {
 
 			int currentDist = this.vertices[i].getDistanciaDaOrigem();
 
@@ -126,7 +128,7 @@ public class Grafo {
 		saida += "Quantidade de vértices: " + this.quantVertices;
 		saida += "\n Quantidade de arestas: " + this.quantArestas;
 		
-		for (int i = 0; i < this.vertices.length; i++) {
+		for (int i = 0; i <= this.vertices.length; i++) {
 			saida += "\n O menor caminho do vértice 0 ao " + i + " é " + vertices[i].getDistanciaDaOrigem();
 		}
 		
@@ -136,11 +138,6 @@ public class Grafo {
 	
 	
 	
-
-	public Vertice[] getArestas() {
-		return vertices;
-	}
-
 	public int getQuantArestas() {
 		return quantVertices;
 	}
@@ -159,10 +156,6 @@ public class Grafo {
 
 	public void setQuantVertices(int quantVertices) {
 		this.quantVertices = quantVertices;
-	}
-
-	public void setArestas(Aresta[] arestas) {
-		this.arestas = arestas;
 	}
 
 	public void setQuantArestas(int quantArestas) {

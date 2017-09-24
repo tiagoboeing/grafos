@@ -213,19 +213,19 @@ public class Grafo {
 		
 		for (Aresta arresta : arrestas) {
 			
-			Aresta arrestaNova = new Aresta(); 
+			Aresta arestaNova = new Aresta(); 
 			arresta.setValor(1);
 			
 			for (Vertice vert : verticesList) {
 				if(vert.getNome().equals(arresta.getVerticeSaida().getNome())){
-					arrestaNova.setVerticeSaida(vert);
+					arestaNova.setVerticeSaida(vert);
 				}else if(vert.getNome().equals(arresta.getVerticeChegada().getNome())){
-					arrestaNova.setVerticeChegada(vert);
+					arestaNova.setVerticeChegada(vert);
 				}
 			}
 			
-			arrestaNova.setValor(1);
-			arrestasList.add(arrestaNova);
+			arestaNova.setValor(1);
+			arrestasList.add(arestaNova);
 		}
 		
 		if(tipoGrafo == 1){
