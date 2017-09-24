@@ -2,7 +2,7 @@ package trabalho_1;
 
 import javax.swing.JOptionPane;
 
-public class main {
+public class Main {
 	
 	public static void main(String[] args) {
 		
