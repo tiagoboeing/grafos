@@ -11,28 +11,35 @@ public class Main {
     private static final int V5 = 4;
 
 
-    private static int readStation(String type, Scanner in) {
-        while (true) {
-            System.out.println(type + ":");
-            String line = in.nextLine().trim();
-            if (line.isEmpty()) {
+    private static int leConsole(String tipo, Scanner entrada) {
+        
+    	while (true) {
+            
+        	System.out.println(tipo + ":");
+            String verticeInformado = entrada.nextLine().trim();
+            
+            if (verticeInformado.isEmpty()) {
                 System.out.println("Programa encerrado!");
                 System.exit(0);
             }
             try {
-                int station = Integer.parseInt(line);
-                if (station >= 1 && station <= 20) return station-1;
-            } catch (NumberFormatException e) {
-            }
+                
+            	int vertInf = Integer.parseInt(verticeInformado);
+                if (vertInf >= 1) { 
+                	return vertInf-1;
+                }
+                
+            } catch (NumberFormatException e) { }
+            
             System.out.println("Vértice inválido!");
         }
+    	
     }
 
 
     public static void main(String[] args) {
-        // Create the Graphland Subway System
-        // (see subwaySystem.pdf file in extra folder)
-        //--------------------------------------------
+        
+    	// cria grafo
         Grafo grafo = new Grafo(20);
 
         // ARESTAS E CUSTOS - origem e destino
@@ -45,21 +52,22 @@ public class Main {
         grafo.makeEdge(V4, V5, 5);
 
 
-        //Graphland Subway Terminal
-        //-------------------------
+        // para entrada de dados diretamente no console
         Scanner in = new Scanner(System.in);
-        System.out.println("-------------------------------------------------------");
+        System.out.println("--------------------------");
 
+        // enquanto console estiver rodando
         while (true) {
-            System.out.println("Informe o vértice de partida e o de destino \n(deixa em branco para fechar)\n");
-            int origem = readStation("Vértice de inicial", in);
-            int destino = readStation("Destino", in);
+        	
+            System.out.println("\nInforme o vértice de partida e o de destino \n(deixa em branco para fechar)\n");
+            int origem = leConsole("Vértice de inicial", in);
+            int destino = leConsole("Destino", in);
 
             System.out.println("Caminho mais curto:");
-            for (Integer station : grafo.path(origem, destino)) {
-                System.out.print((station+1) + " -> ");
+            for (Integer i : grafo.path(origem, destino)) {
+                System.out.print((i+1) + " -> ");
             }
-            System.out.println("EXIT");
+            
         }
     }
 }
