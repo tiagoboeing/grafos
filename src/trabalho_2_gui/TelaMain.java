@@ -1,4 +1,4 @@
-package trabalho_2;
+package trabalho_2_gui;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;

@@ -1,4 +1,4 @@
-package trabalho_2;
+package trabalho_2_gui;
 
 public class Aresta {
 

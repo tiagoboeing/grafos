@@ -1,173 +1,122 @@
 package trabalho_2;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Grafo {
-
-	private Vertice[] vertices;
 	
-	private int quantVertices;
-	private int quantArestas;
-	
-	private static ArrayList<Aresta> listaArestas = new ArrayList<Aresta>();
+    private static final int UNDEFINED = -1;
+    private int vertices[][];
 
-	
-	
-	// função de calculo do grafo - recebe um arraylist
-	public Grafo(ArrayList<Aresta> listaArestas) {
-		
-		
-		// atribui recebimento do método
-		this.listaArestas = listaArestas;
-		this.quantVertices = calculaQuantDeVertices(listaArestas); // 5 vértices no grafo de exemplo
-		this.vertices = new Vertice[this.quantVertices]; // vetor de tamanho [5]
-		
-		for (int i = 0; i < this.quantVertices; i++) {
-			this.vertices[i] = new Vertice();
-		}
+    public Grafo(int numVertices) {
+        vertices = new int[numVertices][numVertices];
+    }
 
-		// quantidade de arestas é o tamanho do arraylist
-		this.quantArestas = listaArestas.size(); // 7 no grafo de exemplo
-		
-		
-		for (int ar = 0; ar < this.quantArestas; ar++) {
-			
-			
-			//this.vertices[listaArestas.get(ar).getVerticeOrigem()].getListaArestas().add(listaArestas.get(ar));
+    public void criaAresta(int vertex1, int vertex2, int valor) {
+        vertices[vertex1][vertex2] = valor;
+        vertices[vertex2][vertex1] = valor; 
+    }
 
-			//this.vertices[listaArestas.get(ar).getVerticeDestino()].getListaArestas().add(listaArestas.get(ar));
-			
-			
-		}
-	}
+    public void removeAresta(int vertex1, int vertex2) {
+        vertices[vertex1][vertex2] = 0;
+        vertices[vertex2][vertex1] = 0;
+    }
 
-	// calcula quantidade de arestas
-	private int calculaQuantDeVertices(ArrayList<Aresta> arestas) {
+    public int getCusto(int vertex1, int vertex2) {
+        return vertices[vertex1][vertex2];
+    }
+    
+    
 
-		int quantDeArestas = 0;
+    /**
+     * @param vértice Origem
+     * @return uma lista com o índice de todos os vértices conectados ao vértice informado
+     */
+    public List<Integer> getCentro(int vertex) {
+    	
+        List<Integer> vizinhos = new ArrayList<>();
+        
+        for (int i = 0; i < vertices[vertex].length; i++)
+            if (vertices[vertex][i] > 0) {
+                vizinhos.add(i);
+            }
 
-		for (Aresta a : arestas) {
-			if (a.getVerticeDestino() > quantVertices) {
-				quantVertices = a.getVerticeDestino();
-			} else if (a.getVerticeOrigem() > quantVertices) {
-				quantVertices = a.getVerticeOrigem();
-			}
-		}
+        return vizinhos;
+    }
 
-		//quantVertices++;
+    /**
+     * Implementação de Dijkstra.
+     * @param vértice de origem
+     * @param verticeDestino vértice de destino
+     * @return o caminho.
+     */
+    public List<Integer> caminho(int verticeOrigem, int verticeDestino) {
+  
+        int custo[] = new int[vertices.length];
+        int anterior[] = new int[vertices.length];
+        Set<Integer> naoVisitado = new HashSet<>();
 
-		return quantVertices;
-	}
-	
-	
-	
+        // o custo para sair do vértice de início é 0 e não possui anteriores
+        custo[verticeOrigem] = 0;
 
-	// algoritmo de dijkstra - calcula menor distância
-	public void calculaMenorDistancia() {
+        // Todos os outros nós (vértices) terão o custo ajustado para INFINITO (max_value) e o anterior INDEFINIDO
+        for (int v = 0; v < vertices.length; v++) {
+            if (v != verticeOrigem) {
+                custo[v] = Integer.MAX_VALUE;
+            }
+            anterior[v] = UNDEFINED;
+            naoVisitado.add(v);
+        }
 
-		// vértice de origem é 0
-		this.vertices[0].setDistanciaDaOrigem(0);
-		int proximoVertice = 0;
+        // BUSCA NO GRAFO
+        while (!naoVisitado.isEmpty()) {
+        	
+            int proximo = maisProximo(custo, naoVisitado);
+            naoVisitado.remove(proximo);
 
-		// visita todos os vértices
-		for (int i = 0; i <= this.vertices.length; i++) {
+            for (Integer vizinho : getCentro(proximo)) {
+               
+            	int custoTotal = custo[proximo] + getCusto(proximo, vizinho);
+            	
+                if (custoTotal < custo[vizinho]) {
+                    custo[vizinho] = custoTotal;
+                    anterior[vizinho] = proximo;
+                }
+                
+            }
+            
+            // Encontrou?
+            if (proximo == verticeDestino) {
+                return criaListadeCaminhos(anterior, proximo);
+            }
+        }
 
-			// rodear a vizinhança
-			ArrayList<Aresta> currentArestaVertices = this.vertices[proximoVertice].getListaArestas();
+        // Nenhum caminho encontrado
+        return Collections.emptyList();
+    }
 
-			for (int a = 0; a < currentArestaVertices.size(); a++) {
-				int centroIndice = currentArestaVertices.get(a).getCentro(proximoVertice);
+    
+    private int maisProximo(int[] dist, Set<Integer> unvisited) {
+        double minDist = Integer.MAX_VALUE;
+        int minIndex = 0;
+        for (Integer i : unvisited) {
+            if (dist[i] < minDist) {
+                minDist = dist[i];
+                minIndex = i;
+            }
+        }
+        return minIndex;
+    }
 
-				// somente se não for visitado
-				if (!this.vertices[centroIndice].isVisitado()) {
-
-					int tentative = this.vertices[proximoVertice].getDistanciaDaOrigem()
-							+ currentArestaVertices.get(a).getValor();
-
-					if (tentative < vertices[centroIndice].getDistanciaDaOrigem()) {
-						vertices[centroIndice].setDistanciaDaOrigem(tentative);
-					}
-				}
-			}
-
-			// toda vizinhança visitada, passou todos os vértices
-			vertices[proximoVertice].setVisitado(true);
-
-			// próximo vértice deve ter distância mais curta
-			proximoVertice = getVerticeMenorDistancia();
-
-		}
-	}
-
-	// implementa método de menor distância
-	private int getVerticeMenorDistancia() {
-
-		int verticePartida = 0;
-		int storedDist = Integer.MAX_VALUE;
-
-		for (int i = 0; i <= this.vertices.length; i++) {
-
-			int currentDist = this.vertices[i].getDistanciaDaOrigem();
-
-			// SE o vértice não foi visitado ainda AND a distância da vértice atual for
-			// menor que infinito
-			// ENTÃO valor que era infino recebe a distância do vértice atual
-			if (!this.vertices[i].isVisitado() && currentDist < storedDist) {
-				storedDist = currentDist;
-				verticePartida = i;
-			}
-		}
-
-		return verticePartida;
-	}
-
-	// mostra resultado
-	public void mostraResultado() {
-		String saida = "";
-
-		saida += "Quantidade de vértices: " + this.quantVertices;
-		saida += "\n Quantidade de arestas: " + this.quantArestas;
-		
-		for (int i = 0; i <= this.vertices.length; i++) {
-			saida += "\n O menor caminho do vértice 0 ao " + i + " é " + vertices[i].getDistanciaDaOrigem();
-		}
-		
-		System.out.println(saida);
-	}
-	
-	
-	
-	
-	public int getQuantArestas() {
-		return quantVertices;
-	}
-
-	public int getQuantVertices() {
-		return quantArestas;
-	}
-
-	public Vertice[] getVertices() {
-		return vertices;
-	}
-
-	public void setVertices(Vertice[] vertices) {
-		this.vertices = vertices;
-	}
-
-	public void setQuantVertices(int quantVertices) {
-		this.quantVertices = quantVertices;
-	}
-
-	public void setQuantArestas(int quantArestas) {
-		this.quantArestas = quantArestas;
-	}
-
-	public static ArrayList<Aresta> getListaArestas() {
-		return listaArestas;
-	}
-
-	public static void setListaArestas(ArrayList<Aresta> listaArestas) {
-		Grafo.listaArestas = listaArestas;
-	}
-
+    private List<Integer> criaListadeCaminhos(int[] anterior, int u) {
+        
+    	List<Integer> caminho = new ArrayList<>();
+        caminho.add(u);
+        
+        while (anterior[u] != UNDEFINED) {
+            caminho.add(anterior[u]);
+            u = anterior[u];
+        }
+        Collections.reverse(caminho);
+        return caminho;
+    }
 }
