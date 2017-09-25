@@ -50,6 +50,34 @@ public class Main {
 		// enquanto console estiver rodando
 		while (true) {
 			
+			
+			// PERGUNTA SE GRAFO É ORIENTADO OU NÃO
+			System.out.println("Qual o tipo de grafo? \n1 = Orientado | 2 = Não orientado \n---------");
+			System.out.print("Resposta: ");
+			Scanner input = new Scanner(System.in);
+			String inputTipoGrafo = input.nextLine().trim();
+			
+			System.out.println("");
+			
+			// default: orientado
+			Boolean grafoOrientado = true;
+			
+				// atribui true or false para grafoOrientado
+				switch (inputTipoGrafo) {
+				
+				case "1":
+					grafoOrientado = true;
+					System.out.println("|||||||| Calculando grafo ORIENTADO |||||||| \n\n");
+					break;
+	
+				case "2":
+					grafoOrientado = false;
+					System.out.println("|||||||| Calculando grafo NÃO ORIENTADO ||||||||\n\n");
+					break;
+				}
+					
+			
+				
 			// CADASTRA VÉRTICES
 			Scanner pedeDados = new Scanner(System.in);
 			String pedeVertice2 = " ";
@@ -134,7 +162,7 @@ public class Main {
 						if (!pedeArestas.equals("")) {
 
 							for (int i = 0; i < contArestas; i++) {
-								grafo.criaAresta(arestaOrigem-1, arestaDestino-1, valorAresta);
+								grafo.criaAresta(arestaOrigem-1, arestaDestino-1, valorAresta, grafoOrientado);
 							}
 						}
 

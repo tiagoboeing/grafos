@@ -7,13 +7,19 @@ public class Grafo {
     private static final int UNDEFINED = -1;
     private int vertices[][];
 
+    
     public Grafo(int numVertices) {
         vertices = new int[numVertices][numVertices];
     }
 
-    public void criaAresta(int vertex1, int vertex2, int valor) {
+    // @param vérticeOrigem, vérticeDestino, tipoGrafo = Orientado/true
+    public void criaAresta(int vertex1, int vertex2, int valor, boolean isOrientado) {
         vertices[vertex1][vertex2] = valor;
-        vertices[vertex2][vertex1] = valor; 
+        
+        // se o grafo for não orientado, adiciona caminho de volta
+        if(isOrientado == false) {
+        	vertices[vertex2][vertex1] = valor;
+        }
     }
 
     public void removeAresta(int vertex1, int vertex2) {
@@ -95,7 +101,9 @@ public class Grafo {
     }
 
     
+    // pega vertice mais próximo
     private int maisProximo(int[] dist, Set<Integer> unvisited) {
+    	
         double minDist = Integer.MAX_VALUE;
         int minIndex = 0;
         for (Integer i : unvisited) {
