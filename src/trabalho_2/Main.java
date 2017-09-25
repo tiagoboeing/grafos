@@ -166,7 +166,7 @@ public class Main {
 			System.out.println("\nInforme o vértice de partida \n(deixe em branco para fechar)\n");
 			int origem = leConsole("Vértice de início", in);
 			
-			System.out.println("Caminho mais curto, partindo do vértice: " + origem+1);
+			System.out.println("Caminho mais curto, partindo do vértice: " + (origem+1));
 			
 			for(int a = 0; a < contVertices; a++) {
 				
