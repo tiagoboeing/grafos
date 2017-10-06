@@ -60,5 +60,5 @@ Entrada:<br>
 Saída:
 <ul>
 <li>As arestas do subgrafo (árvore geradora mínima) e o custo.</li>
-</ul>
+</ul><br>
 Implementar os dois algoritmos: Kruskal e Prim-Jarnik
