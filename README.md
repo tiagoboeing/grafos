@@ -49,7 +49,7 @@ vértices</li>
 
 
 <h2>Trabalho 3</h2>
-<b>Resolução do problema da árvore geradora mínima:</b><br><br>
+<b>Resolução do problema da árvore geradora mínima:</b><br>
 Implementar os dois algoritmos: Kruskal e Prim-Jarnik<br><br>
 Entrada:<br>
 <ul>
