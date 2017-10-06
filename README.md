@@ -50,6 +50,7 @@ vértices</li>
 
 <h2>Trabalho 3</h2>
 <b>Resolução do problema da árvore geradora mínima:</b><br><br>
+Implementar os dois algoritmos: Kruskal e Prim-Jarnik<br><br>
 Entrada:<br>
 <ul>
 <li>Tipo de grafo: não-orientado</li>
@@ -60,5 +61,4 @@ Entrada:<br>
 Saída:
 <ul>
 <li>As arestas do subgrafo (árvore geradora mínima) e o custo.</li>
-</ul><br>
-Implementar os dois algoritmos: Kruskal e Prim-Jarnik
+</ul>
