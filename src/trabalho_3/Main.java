@@ -1,19 +1,34 @@
+/*
+ * TRABALHO 3
+ *  
+ * - Leonardo May (github.com/leonardojcmay)
+ * - Tiago Boeing (github.com/tiagoboeing)
+ * 
+ * Resolução do problema da árvore geradora mínima:
+ * 
+ * Entrada:
+ * - Tipo de grafo: não-orientado - ok
+ * - Valorado - somente arestas - ok
+ * - Conjunto V - ok
+ * - Conjunto E - ok
+ * 
+ * Saída:
+ * - As arestas do subgrafo (árvore geradora mínima) e o custo.
+ * 
+ * Implementar os dois algoritmos: Kruskal e Prim-Jarnik */
+
 package trabalho_3;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-/*
-	private static final int V1 = 0;
-	private static final int V2 = 1;
-	private static final int V3 = 2;
-	private static final int V4 = 3;
-	private static final int V5 = 4;*/
 
 	private static ArrayList<Vertice> listaVertices = new ArrayList<Vertice>();
 	int[] vertices;
 
+	
+	// função de entrada de dados
 	private static int leConsole(String tipo, Scanner entrada) {
 
 		while (true) {
@@ -41,6 +56,7 @@ public class Main {
 	}
 	
 
+	// MAIN
 	public static void main(String[] args) {
 
 		System.out.println("--------------------------");
@@ -50,32 +66,8 @@ public class Main {
 		// enquanto console estiver rodando
 		while (true) {
 			
-			
-			// PERGUNTA SE GRAFO É ORIENTADO OU NÃO
-			System.out.println("Qual o tipo de grafo? \n1 = Orientado | 2 = Não orientado \n---------");
-			System.out.print("Resposta: ");
-			Scanner input = new Scanner(System.in);
-			String inputTipoGrafo = input.nextLine().trim();
-			
-			System.out.println("");
-			
-			// default: orientado
-			Boolean grafoOrientado = true;
-			
-				// atribui true or false para grafoOrientado
-				switch (inputTipoGrafo) {
-				
-				case "1":
-					grafoOrientado = true;
-					System.out.println("|||||||| Calculando grafo ORIENTADO |||||||| \n\n");
-					break;
-	
-				case "2":
-					grafoOrientado = false;
-					System.out.println("|||||||| Calculando grafo NÃO ORIENTADO ||||||||\n\n");
-					break;
-				}
-					
+			// Calcula somente como grafo não-orientado
+			Boolean grafoOrientado = false;
 			
 				
 			// CADASTRA VÉRTICES
