@@ -8,9 +8,9 @@ Materiais no Google Drive: <br>
 https://drive.google.com/drive/folders/0B6z8ffELRxrJQnEwWWQtUXFRLUk?usp=sharing <br><br>
 
 <h3>Sumário</h3>
- <a href="#trabalho-1">- Trabalho 1</a>
- <a href="#trabalho-2">- Trabalho 2</a>
- <a href="#trabalho-3">- Trabalho 3</a>
+ <a href="#trabalho-1">- Trabalho 1</a><br>
+ <a href="#trabalho-2">- Trabalho 2</a><br>
+ <a href="#trabalho-3">- Trabalho 3</a><br>
 
 <br><hr>
 <h2>Trabalho 1</h2>
