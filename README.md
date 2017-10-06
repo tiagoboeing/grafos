@@ -1,6 +1,8 @@
 # grafos
 Disciplina: Grafos<br>
 Semestre: 2017/2<br>
+Curso: Ciência da Computação<br>
+Professor: Max Pereira<br>
 Universidade do Sul de Santa Catarina (UNISUL)<br><br>
 Materiais no Google Drive: <br>
 https://drive.google.com/drive/folders/0B6z8ffELRxrJQnEwWWQtUXFRLUk?usp=sharing
