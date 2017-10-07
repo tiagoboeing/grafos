@@ -1,4 +1,4 @@
-package trabalho_3;
+package trabalho_3_backup;
 
 import java.util.*;
 
@@ -14,6 +14,7 @@ public class Grafo {
         no = new int[numVertices][numVertices];
                
     }
+    
 
     // @param vérticeOrigem, vérticeDestino, tipoGrafo = Orientado/true
     public void criaAresta(int vertice1, int vertice2, int custoAresta, boolean isOrientado) {
@@ -28,6 +29,7 @@ public class Grafo {
         }
         
     }
+
     
     // apenas para testes
     public void removeAresta(int vertex1, int vertex2) {
@@ -41,13 +43,15 @@ public class Grafo {
         return no[vertex1][vertex2];
     }
     
+    
 
     // ordena por custo - ORDEM CRESCENTE
     public void colocaOrdemCrescente(){
     	
-    	Arrays.sort(no);
+    	Arrays.sort(no[0]);
     	
     	System.out.println(Arrays.toString(no[1]));
+
     	
     }
     
@@ -59,15 +63,23 @@ public class Grafo {
      */
     public List<Integer> getCentro(int vertex) {
     	
-        List<Integer> vizinhos = new ArrayList<>();
+        List<Integer> listaVizinhos = new ArrayList<>();
         
         for (int i = 0; i < no[vertex].length; i++)
+        	
             if (no[vertex][i] > 0) {
-                vizinhos.add(i);
+                listaVizinhos.add(i);
             }
 
-        return vizinhos;
+        return listaVizinhos;
     }
+    
+    
+    /**
+     * Implementação de ordenação de valores
+     */
+    
+    
 
     /**
      * Implementação de Dijkstra.
@@ -86,12 +98,22 @@ public class Grafo {
 
         // Todos os outros nós (vértices) terão o custo ajustado para INFINITO (max_value) e o anterior INDEFINIDO
         for (int v = 0; v < no.length; v++) {
-            if (v != verticeOrigem) {
+            
+        	if (v != verticeOrigem) {
                 custo[v] = Integer.MAX_VALUE;
             }
+            
             anterior[v] = UNDEFINED;
+            
+            // esquema de fila
             listaNaoVisitados.add(v);
+            
+            
+            
         }
+        
+        
+        
 
         // BUSCA NO GRAFO
         /**
@@ -101,13 +123,13 @@ public class Grafo {
         while (!listaNaoVisitados.isEmpty()) {
         	
             int proximo = maisProximo(custo, listaNaoVisitados);
-
             
             // tira o vértice adjacente com menor custo da lista de não visitados, ou seja: marca como visitado
             listaNaoVisitados.remove(proximo);
 
+            
             for (Integer vizinho : getCentro(proximo)) {
-               
+            	
             	/** o custoTotal = custo para ir do A,C é 20 + custo para ir do C,D é 5, por exemplo
             	 * custoTotal <- 25 (custo de ir do A até o D)
             	 * se o custo de ir do A > D for menor que o custo pra ir do A,B por ex.:
@@ -139,37 +161,46 @@ public class Grafo {
      * @param Distância dos vértices da fila
      * @param Fila de vértices que falta visitar
      * @return vértice adjacente com menor custo
-     * 
-     * Encontra o vértice com valor mínimo e ainda não incluso na árvore
      */
     private int maisProximo(int[] dist, Set<Integer> unvisited) {
     	
         double minDist = Integer.MAX_VALUE;
         int minIndex = 0;
+        
         for (Integer i : unvisited) {
+        	
+        	/** Ex.: se o custo para ir de A,C = 20
+        	 *  
+        	 * SE 20 < infinito ENTÃO 
+        	 * 
+        	 * infinito <- 20
+        	 * minIndex <- vértice[i] 
+        	 */
             if (dist[i] < minDist) {
                 minDist = dist[i];
                 minIndex = i;
             }
+            
         }
         return minIndex;
     }
-    
-    
 
-    
     
     // grava caminho (vértices anteriores)
     private List<Integer> criaListadeCaminhos(int[] anterior, int u) {
         
-    	List<Integer> caminho = new ArrayList<>();
-        caminho.add(u);
+    	List<Integer> listaCaminho = new ArrayList<>();
+        listaCaminho.add(u);
+               
         
         while (anterior[u] != UNDEFINED) {
-            caminho.add(anterior[u]);
+            listaCaminho.add(anterior[u]);
             u = anterior[u];
         }
-        Collections.reverse(caminho);
-        return caminho;
+        
+        // pega caminho anterior
+        Collections.reverse(listaCaminho);
+        
+        return listaCaminho;
     }
 }

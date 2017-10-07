@@ -17,13 +17,10 @@
  * 
  * Implementar os dois algoritmos: Kruskal e Prim-Jarnik */
 
-package trabalho_3;
+package trabalho_3_backup;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import trabalho_3_backup.Grafo;
-import trabalho_3_backup.Vertice;
 
 public class Main {
 
@@ -51,6 +48,7 @@ public class Main {
 
 	// MAIN
 	public static void main(String[] args) {
+		
 
 		System.out.println("--------------------------");
 
