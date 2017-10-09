@@ -22,10 +22,10 @@ package trabalho_3_backup;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 public class Main {
 
 	private static ArrayList<Vertice> listaVertices = new ArrayList<Vertice>();
-	int[] vertices;
 
 	
 	// função de entrada de dados
@@ -40,15 +40,13 @@ public class Main {
 				System.out.println("Programa encerrado!");
 				System.exit(0);
 			}
-
 		}
-
 	}
 	
 
+	
 	// MAIN
 	public static void main(String[] args) {
-		
 
 		System.out.println("--------------------------");
 
@@ -65,13 +63,15 @@ public class Main {
 			Scanner pedeDados = new Scanner(System.in);
 			String pedeVertice2 = " ";
 
-			System.out.println("Informe os vértices para cadastrar \n(somente inteiros) - Parar deixe em branco \n");
+			System.out.println("Informe os vértices para cadastrar \n(somente inteiros) - Parar deixe em branco \n COMECE DO VÉRTICE ZERO (0)");
 			while (!pedeVertice2.equals("")) {
 
 				// pede vértices
 				System.out.print("Informe um vértice: ");
 				pedeVertice2 = pedeDados.nextLine().trim();
 
+				
+				// somente para listar vértices
 				if (!pedeVertice2.equals("")) {
 					Vertice v = new Vertice();
 					v.setNomeVertice(Integer.parseInt(pedeVertice2));
@@ -81,7 +81,7 @@ public class Main {
 				contVertices++;
 			}
 
-			System.out.println(contVertices);
+			
 			// cria grafo
 			Grafo grafo = new Grafo(contVertices-1); // cont = quantidade de vértices cadastrados
 
@@ -90,9 +90,9 @@ public class Main {
 			Scanner pedeDados2 = new Scanner(System.in);
 			String pedeArestas = " ";
 			String pedeValorArestas = " ";
-			int arestaOrigem;
-			int arestaDestino;
-			int contArestas = 0;
+			int vertice1;
+			int vertice2;
+
 
 			System.out.println("\n\n============\n"
 					+ "Informe as arestas \n(separadas por , Ex.: 1,2) - PARAR? Deixe em branco \n");
@@ -101,30 +101,26 @@ public class Main {
 				try {
 
 					// PEDE PAR DE ARESTAS
-					System.out.print("Arestas: ");
+					System.out.print("Aresta: ");
 					pedeArestas = pedeDados2.nextLine().trim();
 
 					String[] dados = pedeArestas.split(",");
-					arestaOrigem = Integer.parseInt(dados[0])-1;
-					arestaDestino = Integer.parseInt(dados[1])-1;
+					vertice1 = Integer.parseInt(dados[0]);
+					vertice2 = Integer.parseInt(dados[1]);
 
 					// PEDE VALOR DO PAR DE ARESTAS
-					System.out.print("Valor do par de arestas " + pedeArestas + " (inteiro): ");
+					System.out.print("Valor da aresta " + pedeArestas + " (inteiro): ");
 					pedeArestas = pedeDados2.nextLine().trim();
 
 					int valorAresta = Integer.parseInt(pedeArestas);
-
-					contArestas++; // contador
 
 					// só aceita par
 					if (dados.length > 0 && dados.length <= 2) {
 
 						if (!pedeArestas.equals("")) {
-
-							for (int i = 0; i < contArestas; i++) {
-								grafo.criaAresta(arestaOrigem, arestaDestino, valorAresta, grafoOrientado);
-							}
 							
+							// cria aresta no grafo
+							grafo.novaAresta(vertice1, vertice2, valorAresta, grafoOrientado);
 						}
 
 					} else {
@@ -135,27 +131,37 @@ public class Main {
 				} catch (Exception e) {
 					System.out.println("\n-----------------\n A aresta não faz parte da lista de vértices ou você digitou valores inválidos.\n Caso tenha utilizado a função SAIR, ignore a mensagem \n\n");
 				}	
-				
 			}
 			
+
+			// chama algoritmo de prim
+			System.out.println("ALGORITMO DE PRIM-JARNIK \n =========== \n");
+			grafo.primJarnik();
+			System.out.println("\n ============= \n");
 			
-			grafo.colocaOrdemCrescente();
+			
+			// chama kruskal
+			System.out.println("ALGORITMO DE KRUSKAL \n =========== \n");
+			grafo.Kruskal();
+			System.out.println("\n ============= \n");
 			
 			
 		}
-	}
+		
+		
+		
+		
+		
+		
+	} // fecha MAIN
 	
 
-	
+	// apenas para debug
 	private static void listaVertices() {
-
 		System.out.println("\n\n===========\nLISTA DE VÉRTICES");
 		for (Vertice v : listaVertices) {
-
 			System.out.println(v.getNomeVertice());
-
 		}
-
 	}
 
 }

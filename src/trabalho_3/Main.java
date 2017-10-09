@@ -139,6 +139,13 @@ public class Main {
 			grafo.primJarnik();
 			System.out.println("\n ============= \n");
 			
+			
+			// chama kruskal
+			System.out.println("ALGORITMO DE KRUSKAL \n =========== \n");
+			grafo.Kruskal();
+			System.out.println("\n ============= \n");
+			
+			
 		}
 		
 		
@@ -149,7 +156,7 @@ public class Main {
 	} // fecha MAIN
 	
 
-	
+	// apenas para debug
 	private static void listaVertices() {
 		System.out.println("\n\n===========\nLISTA DE VÉRTICES");
 		for (Vertice v : listaVertices) {

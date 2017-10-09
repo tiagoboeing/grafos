@@ -6,6 +6,7 @@ public class Grafo {
 	
     private static final int UNDEFINED = -1;
     private int no[][];
+    private int quantVertices = 0;
 
     
     /**
@@ -17,27 +18,18 @@ public class Grafo {
     	
     	System.out.println("Quant. vértices: " + (numVertices));
     	
+    	
+    	// inicializa grafo para kruskal
+//    	Kruskal kruskal = new Kruskal(numVertices, numVertices);
+    	
+    	
+    	// inicializa para prim jarnik
     	no = new int[numVertices][numVertices];
     	
-//        no = new int[4][4];
-        
-        // GRAFO EXEMPLO
-//        no[0][1] = 30;
-//        no[1][0] = 30;
-//        
-//        no[0][2] = 20;
-//        no[2][0] = 20;
-//        
-//        no[2][3] = 5;
-//        no[3][2] = 5;
-//        
-//        no[2][1] = 10;
-//        no[1][2] = 10;
-        
-        
-        // chamar na principal
-//        primJarnik();
-        
+    	
+    	// passa quantidade de vértices para uma variável acessível
+    	quantVertices = numVertices; 	
+    	        
     }
     
     
@@ -48,6 +40,7 @@ public class Grafo {
 		if(isOrientado == false)
 			no[vertice2][vertice1] = valorAresta;
     }
+    
     
     
     // apenas para testes
@@ -98,9 +91,9 @@ public class Grafo {
     
     
     
+    
     /**
      * CONSTRÓI ÁRVORE GERADORA MÍNIMA - ALGORITMO DE PRIM JARNIK
-     * @param grafo
      * utiliza matriz de adjacência
      */
     void primJarnik()
@@ -156,9 +149,41 @@ public class Grafo {
         }
  
         // constrói Árvore geradora mínima
-        constroiArvore(pai, no.length, grafo);
-        
+        constroiArvore(pai, no.length, grafo);  
     }
     
+    
+    
+    
+    // ALGORITMO DE KRUSKAL
+    void Kruskal() {
+    	
+    	// inicializa grafo para kruskal
+    	Kruskal kruskal = new Kruskal(no.length, no.length);
+    	
+    	// pega custo e cadastra arestas para Kruskal
+        for (int i = 0; i < no.length; i++) {
+        	for (int j = 0; j < no.length; j++) {
+        		
+        		// se o custo for maior que zero quer dizer que não é origem
+        		if(getCusto(i, j) > 0){
+  
+        			kruskal.aresta[i].origem = i;
+        			kruskal.aresta[i].destino = j;
+        			kruskal.aresta[i].peso = getCusto(i, j);
+        			
+        		}
+        		
+			}        	
+		}
+        
+        // chama classe Kruskal que realiza calcule e mostra resultado
+    	kruskal.KruskalMST(no);
+    	
+    }
+    
+    
+    
+  
     
 }
