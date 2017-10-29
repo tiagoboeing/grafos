@@ -15,7 +15,7 @@ package trabalho_extra_sudoku;
 
 public class Main {
 	
-	int[8][8] sudoku[][] = {
+	int[][] sudoku[][] = {
 	
 	sudoku[1, 2] = 8
 	sudoku[1, 3] = 1
