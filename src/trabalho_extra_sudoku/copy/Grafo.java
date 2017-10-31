@@ -1,4 +1,4 @@
-package trabalho_extra_sudoku;
+package trabalho_extra_sudoku.copy;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -15,13 +15,10 @@ public class Grafo {
 	 cria grafo com n vértices
 	*/
 	public Grafo(int n) {
-		
 		numVertices = n;
 		vertices = new Vertice[n];
-		
 		for (int i = 0; i < n; i++)
 			vertices[i] = new Vertice(i);
-		
 	}
 
 	public int size() {
@@ -58,7 +55,7 @@ public class Grafo {
 		
 	}
 
-	// realiza busca em profundidade no grafo
+	/* realiza busca em profundidade no grafo */
 	public void dfs() {
 		for (Vertice v : vertices) {
 			v.setVisited(false);
@@ -72,39 +69,30 @@ public class Grafo {
 
 
 	/**
-	 faz primeira busca
+	 carry out a breadth first search/traversal of the graph
+	 psedocode version
 	 */
 	public void bfs() {
-		
-		// define como não visitado
 		for (Vertice v : vertices) v.setVisited(false);
-		Queue<Vertice> fila = new LinkedList<Vertice>();
-		
+		Queue<Vertice> queue = new LinkedList<Vertice>();
 		for (Vertice v : vertices) {
-			
 			if (!v.getVisited()) {
 				v.setVisited(true);
 				v.setPredecessor(v.getIndex());
-				fila.add(v);
-				
-				while (!fila.isEmpty()) {
-					Vertice u = fila.remove();
+				queue.add(v);
+				while (!queue.isEmpty()) {
+					Vertice u = queue.remove();
 					for (ListaAdjacencia adj : u.getAdjList()) {
-						
 						int index = adj.getverticeNumero();
 						Vertice w = vertices[index];
-						
 						if (!w.getVisited()) {
 							w.setVisited(true);
 							w.setPredecessor(u.getIndex());
-							fila.add(w);
+							queue.add(w);
 						}
-						
-					} // fecha for
-					
-				} // fecha while
+					}
+				}
 			}
-			
 		}
 	}
 }

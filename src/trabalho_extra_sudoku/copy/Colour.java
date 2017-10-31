@@ -1,4 +1,4 @@
-package trabalho_extra_sudoku;
+package trabalho_extra_sudoku.copy;
 
 import java.util.*;
 

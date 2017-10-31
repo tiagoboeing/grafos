@@ -1,45 +1,42 @@
-package trabalho_extra_sudoku;
+package trabalho_extra_sudoku.copy;
 
 import java.util.LinkedList;
 
-// classe para representar um vértice em um gráfico
+
+/**
+ class to represent a vertex in a graph
+*/
 public class Vertice {
    
-	// lista de adjacência do vértice
-    private LinkedList<ListaAdjacencia> adjList;
+    private LinkedList<ListaAdjacencia> adjList ; // the adjacency list of the vertex 
+    private int index; // the index of the vertex
     
-    //o índice/posição do vértice
-    private int index;
-    
-    // se o vértice foi visitado
-    boolean visitado;
-    
-    // índice do vértice anterior ao visitado atualmente
-    int predecessor; 
-    
-    // valor armazenado no vértice.
-    int numero;
+    // possibly other fields, for example representing data
+    // stored at the node, whether the vertex has been visited
+    // in a traversal, its predecessor in such a traversal, etc.
 
+    boolean visited; // whether vertex has been visited in a traversal
+    int predecessor; // index of predecessor vertex in a traversal
     
-    // nova instância de vértice
+    int number; // The number stored at this vertex.
+
+    /**
+	 creates a new instance of Vertex
+	*/
     public Vertice(int n) {
-    	
     	adjList = new LinkedList<ListaAdjacencia>();
     	index = n;
-    	visitado = false;
-    	
-    	// indefinido por padrão
-        numero = -1;
-        
+    	visited = false;
+        number = -1; // undefined initially.
     }
     
-    // repete construtor
+    /**
+	 copy constructor
+	*/
     public Vertice(Vertice v){
-    	
     	adjList = v.getAdjList();
     	index = v.getIndex();
-    	visitado = v.getVisited();
-    	
+    	visited = v.getVisited();
     }
      
     public LinkedList<ListaAdjacencia> getAdjList(){
@@ -55,11 +52,11 @@ public class Vertice {
     }
     
     public boolean getVisited(){
-    	return visitado;
+    	return visited;
     }
     
     public void setVisited(boolean b){
-    	visitado = b;
+    	visited = b;
     }
     
     public int getPredecessor(){
@@ -71,11 +68,11 @@ public class Vertice {
     }
     
     public int getNumber() {
-        return numero;
+        return number;
     }
     
     public void setNumber(int n) {
-        numero = n;
+        number = n;
     }
     
     public void addToAdjList(int n, int w){

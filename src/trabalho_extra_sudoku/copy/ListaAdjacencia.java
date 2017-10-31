@@ -1,13 +1,14 @@
-package trabalho_extra_sudoku;
+package trabalho_extra_sudoku.copy;
 
 // lista de adjacência de um vértice no grafo
 public class ListaAdjacencia {
 
 	private int verticeNumero;
 	private int verticePeso;
+	// could be other fields, for example representing
+	// properties of the edge - weight, capacity, ...
 	
-	
-    // cria nova instância
+    /* creates a new instance */
 	public ListaAdjacencia(int n, int w){
 		verticeNumero = n;
 		verticePeso = w;
