@@ -5,10 +5,8 @@ import java.util.Scanner;
 
 public class Main {
 
-
 	private static ArrayList<Vertice> listaVertices = new ArrayList<Vertice>();
 	int[] vertices;
-
 	
 	private static int leConsole(String tipo, Scanner entrada) {
 
@@ -33,10 +31,10 @@ public class Main {
 
 			System.out.println("Vértice inválido!");
 		}
-
 	}
 	
 
+	
 	public static void main(String[] args) {
 
 		System.out.println("--------------------------");
@@ -238,21 +236,50 @@ public class Main {
 			// OLARIA
 			grafo.criaAresta(15, 18, 2, grafoOrientado);
 				
+			
+				System.out.println("DESEJA INFORMAR ORIGEM E DESTINO? \nDigite: SIM ou NÃO");
+								
+				Scanner entrada = new Scanner(System.in);
+				String entradaConsole = entrada.nextLine().trim();
+				
+				if(entradaConsole.equalsIgnoreCase("SIM")) {
 					
-			
-			// SOLICITA PONTO INICIAL e mostra melhor caminho
-			Scanner in = new Scanner(System.in);
-			int origem = leConsole("\n \nBairro de origem", in);
-			System.out.println("");
-			
-			for(int a = 0; a < listaVertices.size(); a++) {
+					// SOLICITA ORIGEM E DESTINO
+					Scanner in = new Scanner(System.in);
+					int origem = leConsole("\n \nBairro de origem", in);
+					System.out.println("");
+					
+					Scanner in2 = new Scanner(System.in);
+					int destino = leConsole("Bairro de destino", in2);
+					System.out.println("");
+					
+						for (Integer i : grafo.caminho(origem, destino)) {
+							System.out.print((i) + " --> ");
+						}
+						
+						System.out.println("FIM");
 
-				for (Integer i : grafo.caminho(origem, a)) {		
-					System.out.print((i) + " --> ");
+					
+				} else if(entradaConsole.equalsIgnoreCase("NÃO")) {
+					
+					// SOLICITA SOMENTE ORIGEM
+					Scanner in = new Scanner(System.in);
+					int origem = leConsole("\n \nBairro de origem", in);
+					System.out.println("");
+					
+					for(int a = 0; a < listaVertices.size(); a++) {
+
+						for (Integer i : grafo.caminho(origem, a)) {
+							System.out.print((i) + " --> ");
+						}
+						
+						System.out.println("FIM");
+					}	
+					
 				}
 				
-				System.out.println("FIM");
-			}		
+			
+				
 			
 		}
 	}
