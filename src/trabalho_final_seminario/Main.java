@@ -260,22 +260,6 @@ public class Main {
 						System.out.println("FIM");
 
 					
-				} else if(entradaConsole.equalsIgnoreCase("NÃO")) {
-					
-					// SOLICITA SOMENTE ORIGEM
-					Scanner in = new Scanner(System.in);
-					int origem = leConsole("\n \nBairro de origem", in);
-					System.out.println("");
-					
-					for(int a = 0; a < listaVertices.size(); a++) {
-
-						for (Integer i : grafo.caminho(origem, a)) {
-							System.out.print((i) + " --> ");
-						}
-						
-						System.out.println("FIM");
-					}	
-					
 				} else {
 					
 					// SOLICITA SOMENTE ORIGEM
