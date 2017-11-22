@@ -103,9 +103,7 @@ public class Financeiramente {
 			
 			Vertice v16 = new Vertice();
 			v16.setNomeVertice(16);
-			
-			Vertice v17 = new Vertice();
-			v17.setNomeVertice(17);
+
 
 			
 			// adiciona na lista
@@ -126,7 +124,6 @@ public class Financeiramente {
 			listaVertices.add(v14);
 			listaVertices.add(v15);
 			listaVertices.add(v16);
-			listaVertices.add(v17);
 			
 			
 			
@@ -186,11 +183,11 @@ public class Financeiramente {
 					
 					// SOLICITA ORIGEM E DESTINO
 					Scanner in = new Scanner(System.in);
-					int origem = leConsole("\n \nBairro de origem", in);
+					int origem = leConsole("\n \n¡rea/ano de origem", in);
 					System.out.println("");
 					
 					Scanner in2 = new Scanner(System.in);
-					int destino = leConsole("Bairro de destino", in2);
+					int destino = leConsole("¡rea/ano de destino", in2);
 					System.out.println("");
 					
 						for (Integer i : grafo.caminho(origem, destino)) {
@@ -204,7 +201,7 @@ public class Financeiramente {
 					
 					// SOLICITA SOMENTE ORIGEM
 					Scanner in = new Scanner(System.in);
-					int origem = leConsole("\n \nBairro de origem", in);
+					int origem = leConsole("\n \n¡rea/ano de origem", in);
 					System.out.println("");
 					
 					for(int a = 0; a < listaVertices.size(); a++) {
